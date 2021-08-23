@@ -1,3 +1,13 @@
+button:disabled {
+  @apply tw-text-gray-400 tw-cursor-default;
+}
+
+button:hover:not(:disabled) {
+  @apply tw-bg-gray-200;
+}
+
+/* remove input number contollers */
+
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

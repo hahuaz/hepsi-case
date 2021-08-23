@@ -8,17 +8,23 @@ export const getters = {
 }
 
 export const mutations = {
-  ADD_TO_CART: (state, payload) => {
-    state.productIDs.push({ id: payload, quantity: 1 })
+  ADD_TO_CART: (state, id) => {
+    if (state.productIDs.includes(id)) return
+    state.productIDs.push(id)
   },
 
   INC_QUANTITY(state, id) {
-    const product = state.productIDs.find((product) => product.id === id)
+    const product = state.populatedProducts.find((product) => product.id === id)
     product.quantity++
   },
   DEC_QUANTITY(state, id) {
-    const product = state.productIDs.find((product) => product.id === id)
+    const product = state.populatedProducts.find((product) => product.id === id)
     product.quantity--
+  },
+
+  SET_QUANTITY(state, { id, quantity }) {
+    const product = state.populatedProducts.find((product) => product.id === id)
+    product.quantity = quantity
   },
   SET_POPULATED_PRODUCTS(state, payload) {
     state.populatedProducts = payload
@@ -27,16 +33,19 @@ export const mutations = {
 
 export const actions = {
   async populateCart({ commit, state }) {
-    console.log('in populate')
-    if (state.productIDs.length <= 0) return
-    console.log('population started')
-    const populatedProducts = await Promise.all(
-      state.productIDs.map(async (e) => {
-        const product = await this.$axios.$get(`/cms/products/${e.id}`)
-        return { ...product, quantity: e.quantity }
-      })
-    )
+    try {
+      if (state.productIDs.length <= 0) return
+      const populatedProducts = await Promise.all(
+        state.productIDs.map(async (id) => {
+          const product = await this.$axios.$get(`/cms/products/${id}`)
+          return { ...product, quantity: 1 }
+        })
+      )
 
-    commit('SET_POPULATED_PRODUCTS', populatedProducts)
+      commit('SET_POPULATED_PRODUCTS', populatedProducts)
+    } catch (error) {
+      console.error(error)
+      throw new Error("Couldn't populate cart")
+    }
   },
 }
