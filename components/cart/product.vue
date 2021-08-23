@@ -1,9 +1,87 @@
 <template>
-  <div>cart product</div>
+  <div
+    class="tw-border-t tw-border-b tw-border-gray-200 tw-max-w-screen-sm tw-p-4"
+  >
+    <div class="product__container tw-flex tw-space-x-6">
+      <div class="product__image tw-w-40 tw-h-48 tw-flex-shrink-0">
+        <img
+          class="tw-w-full tw-h-full tw-object-cover tw-object-center"
+          :src="product.image[0].url"
+          alt="image for product"
+        />
+      </div>
+      <div class="product__content tw-flex tw-flex-col tw-justify-between">
+        <p class="product__title tw-text-xl">{{ product.title }}</p>
+        <p
+          class="
+            product__price
+            tw-font-semibold tw-text-gray-600 tw-flex-grow tw-text-xl
+          "
+        >
+          <span
+            v-if="product.price.regular"
+            class="
+              tw-line-through tw-text-red-600 tw-text-xs tw-font-thin tw-mr-1
+            "
+            >{{ product.price.regular }}&#8378;</span
+          >
+          {{ product.price.special }}&#8378;
+        </p>
+      </div>
+    </div>
+    <div class="action tw-flex tw-items-center tw-py-3">
+      <div
+        class="tw-w-40 tw-flex tw-justify-center tw-space-x-4 tw-items-center"
+      >
+        <button
+          class="
+            action__decrease
+            tw-border tw-border-gray-300 tw-rounded-full tw-w-6
+          "
+          :disabled="product.quantity === product.stock"
+          @click="onDecrease(product.id)"
+        >
+          -
+        </button>
+        <input
+          :value="product.quantity"
+          class="tw-w-12 tw-border tw-border-gray-300 tw-rounded tw-text-center"
+          type="number"
+        />
+        <!-- TODO check if have enough stock on increase and disable button -->
+        <button
+          class="
+            action__increase
+            tw-border tw-border-gray-300 tw-rounded-full tw-w-6
+          "
+          @click="onIncrease(product.id)"
+        >
+          +
+        </button>
+        <!-- TODO check if value 1 and disable button -->
+      </div>
+      <button class="tw-mx-auto">Remove</button>
+    </div>
+  </div>
 </template>
 
 <script>
-export default {}
+export default {
+  props: {
+    product: {
+      type: Object,
+      default: () => {},
+    },
+  },
+  methods: {
+    onIncrease(id) {
+      this.$store.commit('cart/INC_QUANTITY', id)
+    },
+    onDecrease(id) {
+      this.$store.commit('cart/DEC_QUANTITY', id)
+    },
+  },
+}
 </script>
 
 <style lang="scss" scoped></style>

@@ -1,4 +1,6 @@
 export default {
+  ssr: true,
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'hepsi-case',
@@ -18,7 +20,7 @@ export default {
   css: ['~/assets/css/main.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: [{ src: '~/plugins/persistedState.client.js' }],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -32,8 +34,19 @@ export default {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [],
+  modules: ['@nuxtjs/axios'],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+
+  axios: {
+    proxy: true, // Can be also an object with default options
+  },
+
+  proxy: {
+    '/cms/': {
+      target: 'https://hahuaz-dev.ue.r.appspot.com/',
+      pathRewrite: { '/cms/': '' },
+    },
+  },
 }
