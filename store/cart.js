@@ -13,6 +13,17 @@ export const mutations = {
     state.productIDs.push(id)
   },
 
+  REMOVE_FROM_CART: (state, id) => {
+    state.productIDs.splice(
+      state.productIDs.findIndex((e) => e === id),
+      1
+    )
+    state.populatedProducts.splice(
+      state.populatedProducts.findIndex((e) => e.id === id),
+      1
+    )
+  },
+
   INC_QUANTITY(state, id) {
     const product = state.populatedProducts.find((product) => product.id === id)
     product.quantity++

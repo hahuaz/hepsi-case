@@ -1,12 +1,14 @@
 <template>
   <div>
-    <p>MY CART ({LENGTH OF CART})</p>
+    <nuxt-link to="/">home</nuxt-link>
+    <p>MY CART ({{ products.length }})</p>
     <cart-product
       v-for="product in products"
       :key="product.id"
       :product="product"
     >
     </cart-product>
+    <p>Total: {{ calcTotal }}</p>
   </div>
 </template>
 
@@ -18,6 +20,12 @@ export default {
   computed: {
     products() {
       return this.$store.getters['cart/getPopulatedProducts']
+    },
+    calcTotal() {
+      return this.products.reduce(
+        (prev, curr) => prev + curr.quantity * curr.price.special,
+        0
+      )
     },
   },
   async mounted() {

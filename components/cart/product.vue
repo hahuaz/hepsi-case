@@ -65,7 +65,12 @@
         </button>
         <!-- TODO check if value 1 and disable button -->
       </div>
-      <button class="tw-mx-auto tw-py-2 tw-px-4 tw-rounded-md">Remove</button>
+      <button
+        class="tw-mx-auto tw-py-2 tw-px-4 tw-rounded-md"
+        @click="onRemove(product.id)"
+      >
+        Remove
+      </button>
     </div>
   </div>
 </template>
@@ -91,6 +96,9 @@ export default {
       if (quantity > this.product.stock) quantity = this.product.stock
 
       this.$store.commit('cart/SET_QUANTITY', { id, quantity })
+    },
+    onRemove(id) {
+      this.$store.commit('cart/REMOVE_FROM_CART', id)
     },
   },
 }
