@@ -104,4 +104,14 @@ export default {
 }
 </script>
 
+<style scoped>
+button:disabled {
+  @apply tw-text-gray-400 tw-cursor-default;
+}
+
+button:hover:not(:disabled) {
+  @apply tw-bg-gray-200;
+}
+</style>
+
 <style lang="scss" scoped></style>

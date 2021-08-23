@@ -1,9 +1,12 @@
-button:disabled {
-  @apply tw-text-gray-400 tw-cursor-default;
-}
+/* transitions */
 
-button:hover:not(:disabled) {
-  @apply tw-bg-gray-200;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.7s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 
 /* remove input number contollers */

@@ -2,12 +2,14 @@
   <div>
     <nuxt-link to="/">home</nuxt-link>
     <p>MY CART ({{ products.length }})</p>
-    <cart-product
-      v-for="product in products"
-      :key="product.id"
-      :product="product"
-    >
-    </cart-product>
+    <transition-group name="fade" appear tag="div">
+      <cart-product
+        v-for="product in products"
+        :key="product.id"
+        :product="product"
+      >
+      </cart-product>
+    </transition-group>
     <p>Total: {{ calcTotal }}</p>
   </div>
 </template>

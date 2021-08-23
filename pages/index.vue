@@ -3,13 +3,18 @@
     <nuxt-link to="/cart">cart</nuxt-link>
     <div class="tw-max-w-screen-xl tw-mx-auto">
       <div class="tw-container tw-mx-auto tw-p-4"></div>
-      <div class="products tw-flex tw-flex-wrap tw-justify-center tw-px-6">
+      <transition-group
+        name="fade"
+        tag="div"
+        class="products tw-flex tw-flex-wrap tw-justify-center tw-px-6"
+        appear
+      >
         <product
           v-for="product in getProducts"
           :key="product.id"
           :product="product"
         ></product>
-      </div>
+      </transition-group>
     </div>
   </div>
 </template>
