@@ -1,5 +1,8 @@
 <template>
-  <div class="tw-relative tw-max-h-screen tw-overflow-hidden">
+  <div
+    class="tw-relative"
+    :class="{ 'tw-max-h-screen tw-overflow-hidden': cartDrawer }"
+  >
     <header
       class="
         tw-mt-6 tw-w-full tw-bg-gray-100 tw-py-4 tw-px-12 tw-flex tw-justify-end
@@ -43,6 +46,9 @@
 import { mapMutations } from 'vuex'
 
 export default {
+  data() {
+    return {}
+  },
   computed: {
     cartDrawer() {
       return this.$store.state.ui.isCartDrawerOpen
