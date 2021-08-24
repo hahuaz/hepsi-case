@@ -1,5 +1,5 @@
 export const state = () => ({
-  isCartDriverOpen: false,
+  isCartDrawerOpen: false,
 })
 
 // export const getters = {
@@ -9,8 +9,8 @@ export const state = () => ({
 // }
 
 export const mutations = {
-  TOGGLE_CART_DRIVER: (state) => {
-    state.isCartDriverOpen = !state.isCartDriverOpen
+  TOGGLE_CART_DRAWER: (state) => {
+    state.isCartDrawerOpen = !state.isCartDrawerOpen
   },
 }
 

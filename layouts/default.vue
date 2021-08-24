@@ -16,7 +16,7 @@
 
     <transition name="slide">
       <div
-        v-if="cartDriver"
+        v-if="cartDrawer"
         class="
           tw-absolute
           tw-inset-0
@@ -44,8 +44,8 @@ import { mapMutations } from 'vuex'
 
 export default {
   computed: {
-    cartDriver() {
-      return this.$store.state.ui.isCartDriverOpen
+    cartDrawer() {
+      return this.$store.state.ui.isCartDrawerOpen
     },
   },
   watch: {
@@ -55,10 +55,10 @@ export default {
   },
   methods: {
     ...mapMutations('ui', [
-      'TOGGLE_CART_DRIVER', // also supports payload `this.nameOfMutation(amount)`
+      'TOGGLE_CART_DRAWER', // also supports payload `this.nameOfMutation(amount)`
     ]),
     toggleCart() {
-      this.TOGGLE_CART_DRIVER()
+      this.TOGGLE_CART_DRAWER()
     },
   },
 }
