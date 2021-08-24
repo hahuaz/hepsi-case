@@ -93,7 +93,10 @@ export default {
     onQuantityInput(id, e) {
       let quantity = Number(e.target.value)
 
-      if (quantity > this.product.stock) quantity = this.product.stock
+      if (quantity > this.product.stock) {
+        quantity = this.product.stock
+        e.target.value = this.product.stock
+      }
 
       this.$store.commit('cart/SET_QUANTITY', { id, quantity })
     },

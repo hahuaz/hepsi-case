@@ -20,7 +20,7 @@ export default {
   css: ['~/assets/css/main.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [{ src: '~/plugins/persistedState.client.js' }],
+  plugins: ['~/plugins/persistedState.client.js', '~/plugins/clickaway'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -31,6 +31,7 @@ export default {
     '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
+    '@nuxtjs/fontawesome',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -47,6 +48,15 @@ export default {
     '/cms/': {
       target: 'https://hahuaz-dev.ue.r.appspot.com/',
       pathRewrite: { '/cms/': '' },
+    },
+  },
+  fontawesome: {
+    icons: {
+      solid: ['faShoppingCart'],
+      // regular: [ ... ],
+      // light: [ ... ],
+      // duotone: [ ... ],
+      // brands: [ ...]
     },
   },
 }

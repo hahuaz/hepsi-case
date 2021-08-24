@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <nuxt-link to="/">home</nuxt-link>
-    <p>MY CART ({{ products.length }})</p>
+  <div class="tw-bg-white tw-h-full">
+    <span>Products: {{ products.length }}</span>
+    <span>\ Total: {{ calcTotal }}</span>
     <transition-group name="fade" appear tag="div">
       <cart-product
         v-for="product in products"
@@ -10,7 +10,15 @@
       >
       </cart-product>
     </transition-group>
-    <p>Total: {{ calcTotal }}</p>
+    <div class="tw-text-center">
+      <button
+        class="
+          tw-text-white tw-bg-primary tw-py-2 tw-px-4 tw-rounded-md tw-my-4
+        "
+      >
+        PLACE ORDER
+      </button>
+    </div>
   </div>
 </template>
 
