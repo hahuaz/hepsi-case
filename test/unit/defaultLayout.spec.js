@@ -16,16 +16,20 @@ describe('defaultLayout.vue', () => {
     }
 
     store = new Vuex.Store({
-      mutations,
+      modules: {
+        namespace: true,
+        ui: {
+          mutations,
+          state: {
+            isCartDrawerOpen: false,
+          },
+        },
+      },
     })
+
     wrapper = mount(defaultLayoutVue, {
       store,
       localVue,
-      computed: {
-        cartDrawer() {
-          return false
-        },
-      },
       stubs: {
         Nuxt: true,
         'font-awesome-icon': true,
@@ -38,15 +42,23 @@ describe('defaultLayout.vue', () => {
 
     expect(mutations['ui/TOGGLE_CART_DRAWER']).toHaveBeenCalled()
   })
-  test('should prevent scrolling when cart is open', async () => {
+  test('should prevent scrolling when cart button clicked', async () => {
     wrapper = await mount(defaultLayoutVue, {
-      store,
-      localVue,
-      computed: {
-        cartDrawer() {
-          return true
+      store: new Vuex.Store({
+        modules: {
+          ui: {
+            mutations: {
+              'ui/TOGGLE_CART_DRAWER': (state) => {
+                state.isCartDrawerOpen = !state.isCartDrawerOpen
+              },
+            },
+            state: {
+              isCartDrawerOpen: false,
+            },
+          },
         },
-      },
+      }),
+      localVue,
       stubs: {
         Nuxt: true,
         'font-awesome-icon': true,
@@ -54,9 +66,10 @@ describe('defaultLayout.vue', () => {
       },
     })
 
+    await wrapper.find('button.open-cart').trigger('click')
+
     const requiredClasess = ['tw-max-h-screen', 'tw-overflow-hidden']
     const appClasses = wrapper.find('div.test-app').classes()
-
     const result = requiredClasess.every((e) => appClasses.includes(e))
 
     expect(result).toBe(true)
