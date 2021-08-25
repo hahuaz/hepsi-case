@@ -33,9 +33,32 @@ describe('defaultLayout.vue', () => {
       },
     })
   })
-  test('TOGGLE_CART_DRAWER mutation should be commited when open cart button clicked', async () => {
+  test('should commit TOGGLE_CART_DRAWER mutation when open cart button clicked', async () => {
     await wrapper.find('button.open-cart').trigger('click')
 
     expect(mutations['ui/TOGGLE_CART_DRAWER']).toHaveBeenCalled()
+  })
+  test('should prevent scrolling when cart is open', async () => {
+    wrapper = await mount(defaultLayoutVue, {
+      store,
+      localVue,
+      computed: {
+        cartDrawer() {
+          return true
+        },
+      },
+      stubs: {
+        Nuxt: true,
+        'font-awesome-icon': true,
+        cart: true,
+      },
+    })
+
+    const requiredClasess = ['tw-max-h-screen', 'tw-overflow-hidden']
+    const appClasses = wrapper.find('div.test-app').classes()
+
+    const result = requiredClasess.every((e) => appClasses.includes(e))
+
+    expect(result).toBe(true)
   })
 })

@@ -2,7 +2,7 @@ import { describe, expect } from '@jest/globals'
 import { createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
 
-import { state, mutations } from '../../store/ui.js'
+import { state, mutations } from '~/store/ui.js'
 
 describe('store/ui', () => {
   test('should toggle isCartDrawerOpen value when TOGGLE_CART_DRAWER commited', () => {

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="tw-relative"
+    class="test-app tw-relative"
     :class="{ 'tw-max-h-screen tw-overflow-hidden': cartDrawer }"
   >
     <header

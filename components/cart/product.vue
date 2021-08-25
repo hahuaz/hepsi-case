@@ -66,7 +66,7 @@
         <!-- TODO check if value 1 and disable button -->
       </div>
       <button
-        class="tw-mx-auto tw-py-2 tw-px-4 tw-rounded-md"
+        class="remove-button tw-mx-auto tw-py-2 tw-px-4 tw-rounded-md"
         @click="onRemove(product.id)"
       >
         Remove
