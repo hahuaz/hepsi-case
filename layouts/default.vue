@@ -9,7 +9,10 @@
       "
     >
       <button
-        class="tw-text-white tw-bg-primary tw-py-2 tw-px-4 tw-rounded-md"
+        class="
+          open-cart
+          tw-text-white tw-bg-primary tw-py-2 tw-px-4 tw-rounded-md
+        "
         @click="toggleCart"
       >
         <font-awesome-icon :icon="['fas', 'shopping-cart']"></font-awesome-icon>
@@ -43,8 +46,6 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
-
 export default {
   data() {
     return {}
@@ -60,11 +61,8 @@ export default {
     // }
   },
   methods: {
-    ...mapMutations('ui', [
-      'TOGGLE_CART_DRAWER', // also supports payload `this.nameOfMutation(amount)`
-    ]),
     toggleCart() {
-      this.TOGGLE_CART_DRAWER()
+      this.$store.commit('ui/TOGGLE_CART_DRAWER')
     },
   },
 }

@@ -15,4 +15,5 @@ module.exports = {
     '<rootDir>/pages/**/*.vue',
   ],
   testEnvironment: 'jsdom',
+  setupFiles: ['./plugins/clickaway.js'],
 }
