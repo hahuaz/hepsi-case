@@ -13,8 +13,10 @@
     <div class="tw-text-center">
       <button
         class="
+          place-order
           tw-text-white tw-bg-primary tw-py-2 tw-px-4 tw-rounded-md tw-my-4
         "
+        @click="onPlaceOrder"
       >
         PLACE ORDER
       </button>
@@ -40,6 +42,11 @@ export default {
   },
   async mounted() {
     await this.$store.dispatch('cart/populateCart')
+  },
+  methods: {
+    onPlaceOrder() {
+      console.log('order placed succesfully')
+    },
   },
 }
 </script>
