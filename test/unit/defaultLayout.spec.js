@@ -33,7 +33,7 @@ describe('defaultLayout.vue', () => {
       },
     })
   })
-  test('TOGGLE_CART_DRAWER mutation should be triggered when open cart button clicked', async () => {
+  test('TOGGLE_CART_DRAWER mutation should be commited when open cart button clicked', async () => {
     await wrapper.find('button.open-cart').trigger('click')
 
     expect(mutations['ui/TOGGLE_CART_DRAWER']).toHaveBeenCalled()
