@@ -1,5 +1,5 @@
 <template>
-  <div class="tw-bg-white tw-h-full">
+  <div class="tw-bg-white tw-min-h-screen">
     <span>Products: {{ products.length }}</span>
     <span>\ Total: {{ calcTotal }}</span>
     <transition-group name="fade" appear tag="div">

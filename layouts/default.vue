@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="test-app tw-relative"
-    :class="{ 'tw-max-h-screen tw-overflow-hidden': cartDrawer }"
-  >
+  <div class="test-app tw-relative" :class="preventScroll">
     <header
       class="
         tw-mt-6 tw-w-full tw-bg-gray-100 tw-py-4 tw-px-12 tw-flex tw-justify-end
@@ -29,8 +26,7 @@
           tw-z-50
           tw-bg-gray-500
           tw-bg-opacity-50
-          tw-max-h-screen
-          tw-overflow-scroll
+          tw-overflow-y-scroll
         "
       >
         <div
@@ -48,7 +44,9 @@
 <script>
 export default {
   data() {
-    return {}
+    return {
+      preventScroll: null,
+    }
   },
   computed: {
     cartDrawer() {
@@ -56,9 +54,15 @@ export default {
     },
   },
   watch: {
-    // isCartVisible(){
-    //   if()
-    // }
+    cartDrawer(newValue) {
+      if (newValue) {
+        this.preventScroll = 'tw-max-h-screen tw-overflow-hidden'
+      } else {
+        setTimeout(() => {
+          this.preventScroll = null
+        }, 301)
+      }
+    },
   },
   methods: {
     toggleCart() {
