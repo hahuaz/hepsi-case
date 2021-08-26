@@ -54,7 +54,7 @@ const mockProduct = {
 
 /* BUG can't inject $get to axios. */
 jest.doMock('axios', () => ({
-  $get: jest.fn(),
+  $get: jest.fn(() => Promise.resolve(mockProduct)),
 }))
 
 describe('store/cart', () => {
